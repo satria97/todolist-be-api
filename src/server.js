@@ -2,10 +2,15 @@ const Hapi = require('@hapi/hapi');
 const activities = require('./api/activities');
 const ActivitiesService = require('./services/inMemory/ActivitiesService');
 const ActivitiesValidator = require('./validator/activities');
+
 const ClientError = require('./exceptions/ClientError');
+const todos = require('./api/todos');
+const TodosService = require('./services/inMemory/TodosService');
+const TodosValidator = require('./validator/todos');
 
 const init = async () => {
   const activitiesService = new ActivitiesService();
+  const todosService = new TodosService();
   const server = Hapi.server({
     port: 3030,
     host: 'localhost',
@@ -16,13 +21,22 @@ const init = async () => {
     },
   });
 
-  await server.register({
-    plugin: activities,
-    options: {
-      service: activitiesService,
-      validator: ActivitiesValidator
+  await server.register([
+    {
+      plugin: activities,
+      options: {
+        service: activitiesService,
+        validator: ActivitiesValidator
+      },
     },
-  });
+    {
+      plugin: todos,
+      options: {
+        service: todosService,
+        validator: TodosValidator
+      },
+    }
+  ]);
 
   server.ext('onPreResponse', (request, h) => {
     // mendapatkan konteks response dari request
