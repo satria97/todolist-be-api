@@ -46,7 +46,7 @@ class ActivitiesService {
     const updatedAt = new Date().toISOString();
 
     this._activities[index] = {
-      ...this._activities,
+      ...this._activities[index],
       title,
       email,
       updatedAt,
@@ -56,7 +56,7 @@ class ActivitiesService {
   deleteActivityById(id) {
     const index = this._activities.findIndex((activity) => activity.id === id);
     if (index === -1) {
-      throw new NotFoundError('Failde to delete activity. Id not found');
+      throw new NotFoundError('Failed to delete activity. Id not found');
     }
     this._activities.splice(index, 1);
   }
