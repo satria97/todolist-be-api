@@ -1,27 +1,27 @@
 const routes = (handler) => [
   {
     method: 'POST',
-    path: '/activity',
+    path: '/activities',
     handler: handler.postActivityHandler,
   },
   {
     method: 'GET',
-    path: '/activity',
+    path: '/activities',
     handler: handler.getActivitiesHandler
   },
   {
     method: 'GET',
-    path: '/activity/{id}',
+    path: '/activities/{id}',
     handler: handler.getActivityByIdHandler,
   },
   {
     method: 'PUT',
-    path: '/activity/{id}',
+    path: '/activities/{id}',
     handler: handler.editActivityByIdHandler,
   },
   {
     method: 'DELETE',
-    path: '/activity/{id}',
+    path: '/activities/{id}',
     handler: handler.deleteActivityByIdHandler
   }
 ];

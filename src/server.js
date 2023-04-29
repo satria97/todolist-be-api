@@ -16,7 +16,7 @@ const init = async () => {
 
   await server.register({
     plugin: activities,
-    option: {
+    options: {
       service: activitiesService,
     },
   });

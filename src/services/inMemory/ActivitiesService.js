@@ -22,7 +22,7 @@ class ActivitiesService {
     return id;
   }
 
-  getActivity() {
+  getActivities() {
     return this._activities;
   }
 

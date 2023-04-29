@@ -5,7 +5,7 @@ module.exports = {
   name: 'activities',
   version: '1.0.0',
   register: async (server, { service }) => {
-    const activitiesHandlder = new ActivitiesHandler(service);
-    server.route(routes(activitiesHandlder));
+    const activitiesHandler = new ActivitiesHandler(service);
+    server.route(routes(activitiesHandler));
   },
 };

@@ -1,6 +1,12 @@
 class ActivitiesHandler {
   constructor(service) {
     this._service = service;
+
+    this.postActivityHandler = this.postActivityHandler.bind(this);
+    this.getActivitiesHandler = this.getActivitiesHandler.bind(this);
+    this.getActivityByIdHandler = this.getActivityByIdHandler.bind(this);
+    this.editActivityByIdHandler = this.editActivityByIdHandler.bind(this);
+    this.deleteActivityByIdHandler = this.deleteActivityByIdHandler.bind(this);
   }
 
   postActivityHandler(request, h) {
