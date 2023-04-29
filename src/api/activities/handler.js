@@ -1,16 +1,18 @@
 class ActivitiesHandler {
-  constructor(service) {
+  constructor(service, validator) {
     this._service = service;
+    this._validator = validator;
 
     this.postActivityHandler = this.postActivityHandler.bind(this);
     this.getActivitiesHandler = this.getActivitiesHandler.bind(this);
     this.getActivityByIdHandler = this.getActivityByIdHandler.bind(this);
-    this.editActivityByIdHandler = this.editActivityByIdHandler.bind(this);
+    this.putActivityByIdHandler = this.putActivityByIdHandler.bind(this);
     this.deleteActivityByIdHandler = this.deleteActivityByIdHandler.bind(this);
   }
 
   postActivityHandler(request, h) {
     try {
+      this._validator.validateNotePayload(request.payload);
       const activityId = this._service.addActivity(request.payload);
       const response = h.response({
         status: 'success',
@@ -61,8 +63,9 @@ class ActivitiesHandler {
     }
   }
 
-  editActivityByIdHandler(request, h) {
+  putActivityByIdHandler(request, h) {
     try {
+      this._validator.validateNotePayload(request.payload);
       const { id } = request.params;
       this._service.editActivityById(id, request.payload);
       return {

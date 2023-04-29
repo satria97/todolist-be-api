@@ -1,6 +1,7 @@
 const Hapi = require('@hapi/hapi');
 const activities = require('./api/activities');
 const ActivitiesService = require('./services/inMemory/ActivitiesService');
+const ActivitiesValidator = require('./validator/activities');
 
 const init = async () => {
   const activitiesService = new ActivitiesService();
@@ -18,6 +19,7 @@ const init = async () => {
     plugin: activities,
     options: {
       service: activitiesService,
+      validator: ActivitiesValidator
     },
   });
 

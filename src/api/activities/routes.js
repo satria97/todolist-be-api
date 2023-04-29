@@ -17,7 +17,7 @@ const routes = (handler) => [
   {
     method: 'PUT',
     path: '/activities/{id}',
-    handler: handler.editActivityByIdHandler,
+    handler: handler.putActivityByIdHandler,
   },
   {
     method: 'DELETE',
