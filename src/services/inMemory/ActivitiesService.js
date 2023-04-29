@@ -30,7 +30,7 @@ class ActivitiesService {
   }
 
   getActivityById(id) {
-    const activity = this._activities.filter((n) => n.id === id)[0];
+    const activity = this._activities.filter((a) => a.id === id)[0];
     if (!activity) {
       throw new NotFoundError('Activity not found');
     }
