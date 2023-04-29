@@ -1,4 +1,6 @@
 const { nanoid } = require('nanoid');
+const InvariantError = require('../../exceptions/InvariantError');
+const NotFoundError = require('../../exceptions/NotFoundError');
 
 class ActivitiesService {
   constructor() {
@@ -8,15 +10,16 @@ class ActivitiesService {
   addActivity({ title, email }) {
     const id = nanoid(16);
     const createdAt = new Date().toISOString();
+    const updatedAt = createdAt;
 
     const newActivity = {
-      title, email, id, createdAt,
+      title, email, id, createdAt, updatedAt
     };
     this._activities.push(newActivity);
 
     const isSuccess = this._activities.filter((activity) => activity.id === id).length > 0;
     if (!isSuccess) {
-      throw new Error('Activity failed to add');
+      throw new InvariantError('Activity failed to add');
     }
 
     return id;
@@ -29,7 +32,7 @@ class ActivitiesService {
   getActivityById(id) {
     const activity = this._activities.filter((n) => n.id === id)[0];
     if (!activity) {
-      throw new Error('Activity not found');
+      throw new NotFoundError('Activity not found');
     }
     return activity;
   }
@@ -37,20 +40,23 @@ class ActivitiesService {
   editActivityById(id, { title, email }) {
     const index = this._activities.findIndex((activity) => activity.id === id);
     if (index === -1) {
-      throw new Error('Failed to update the activity. Id not found');
+      throw new NotFoundError('Failed to update the activity. Id not found');
     }
+
+    const updatedAt = new Date().toISOString();
 
     this._activities[index] = {
       ...this._activities,
       title,
-      email
+      email,
+      updatedAt,
     };
   }
 
   deleteActivityById(id) {
     const index = this._activities.findIndex((activity) => activity.id === id);
     if (index === -1) {
-      throw new Error('Failde to delete activity. Id not found');
+      throw new NotFoundError('Failde to delete activity. Id not found');
     }
     this._activities.splice(index, 1);
   }
