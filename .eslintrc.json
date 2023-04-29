@@ -12,10 +12,10 @@
     "rules": {
         "no-console": 0,
         "linebreak-style": "off",
-        "indent": [
-            2,
-            "tab"
-        ],
+        // "indent": [
+        //     2,
+        //     "tab"
+        // ],
         "no-tabs": 0,
         "no-underscore-dangle": 0,
         "comma-dangle": 0,
